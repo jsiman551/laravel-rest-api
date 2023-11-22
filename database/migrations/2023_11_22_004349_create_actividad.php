@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('foto', 256)->nullable();
             $table->text('descripcion');
             $table->dateTime('fecha');
+            $table->boolean("active")->default(1);
         });
     }
 

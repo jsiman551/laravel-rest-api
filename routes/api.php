@@ -25,6 +25,14 @@ Route::group(['middleware'=>'auth:api'], function(){
     Route::post('addUsers', 'App\Http\Controllers\Api\UserDataController@store');
     Route::put('updateUsers', 'App\Http\Controllers\Api\UserDataController@update');
     Route::delete('deleteUsers', 'App\Http\Controllers\Api\UserDataController@destroy');
+    Route::get('getActividades', 'App\Http\Controllers\Api\ActividadesController@show');
+    Route::get('getActividad/{id}', 'App\Http\Controllers\Api\ActividadesController@showDetail');
+    Route::post('addActividad', 'App\Http\Controllers\Api\ActividadesController@store');
+    Route::post('addConfirmation', 'App\Http\Controllers\Api\ConfirmationController@store');
+    Route::get('getConfirmations', 'App\Http\Controllers\Api\ConfirmationController@show');
+    Route::delete('deleteConfirmations', 'App\Http\Controllers\Api\ConfirmationController@destroy');
+    Route::get('getConfirmation/{id}', 'App\Http\Controllers\Api\ConfirmationController@showDetail');
+    Route::get('getConfirmationUser/{id}', 'App\Http\Controllers\Api\ConfirmationController@showDetailUser');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
