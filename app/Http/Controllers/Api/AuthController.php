@@ -13,16 +13,14 @@ class AuthController extends Controller
     // example for authenticated routes
     public function testOauth (){
         $user = Auth::user();
-        return response()->json([
-            "user" => $user
-        ], status: 200);
+        return $this->sendResponse($user, "test superado correctamente.");
     }
 
     //example for public routes
     public function test (){
-        return response()->json([
+        return $this->sendResponse([
             "status" => "OK"
-        ], status: 200);
+        ], "test superado correctamente.");
     }
 
     public function register(Request $request) {
@@ -35,9 +33,7 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            return response()->json(
-                ["error"=>$validator->errors()], status: 422
-            );
+            return $this->sendError("Error de validación", $validator->errors(), 422);
         }
 
         $input = $request->all();
@@ -45,13 +41,9 @@ class AuthController extends Controller
         $user = User::create($input);
         $token = $user->createToken("laravel-api")->accessToken;
 
-        return response()->json(
-            [
-                "token"=>$token,
-                "user"=>$user
-            ],
-
-            status: 200
-        );
+        return $this->sendResponse([
+            "token"=>$token,
+            "user"=>$user
+        ], "usuario registrado correctamente.");
     }
 }
